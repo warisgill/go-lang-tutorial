@@ -1,4 +1,4 @@
-package clientserver
+package main
 
 import (
 	"bufio"
@@ -7,22 +7,33 @@ import (
 )
 
 func handleConnection(conn net.Conn) {
-	// get message, output
-	message, _ := bufio.NewReader(conn).ReadString('\n')
-	fmt.Print("Message Received:", string(message))
+
+	message, _ := bufio.NewReader(conn).ReadString('\n')          // will listen for message to process ending in newline (\n)
+	fmt.Print(">Server Side| Message Received:", string(message)) // printing the message on terminal
+	servermessage := "Thank you for connecting."
+	conn.Write([]byte(servermessage + "\n")) // writing back to cleitn
+
 }
 
 func main() {
-	ln, err := net.Listen("tcp", ":8080")
+	fmt.Println("> Launching the server ...")
+
+	ln, err := net.Listen("tcp", "localhost:8080") // listening to incoming connections
+
 	if err != nil {
 		// handle error
 	}
 
-	for {
-		conn, err := ln.Accept()
+	for { // loop forever (or until ctrl-c)
+
+		conn, err := ln.Accept() // accept connection on port
+		fmt.Println(">Server Side| New Client connected.", conn)
 		if err != nil {
 			// handle error
 		}
-		go handleConnection(conn)
+
+		handleConnection(conn)
+
+		// But there is an issue.???????????
 	}
 }
