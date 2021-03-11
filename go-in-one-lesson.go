@@ -44,7 +44,7 @@ import (
 )
 
 func main() {
-	fmt.Println("************** Welcome to Distribute Systems ********************")
+	fmt.Println("************** Welcome to Distributed Systems ********************")
 
 	fmt.Printf("\n\n> ========== Unit 1 : Different ways to declare & initialize variables ========= \n\n")
 	var a0 int                                                               // declaring a variable
@@ -62,7 +62,7 @@ func main() {
 	const g = 9.89
 	var b5 = a5 // Again the compiler will infer the type
 
-	fmt.Println("Different ways of variable declartion and initialization:", b1, b2, b3, b4, b5)
+	fmt.Println("Different ways of variable declaration and initialization:", b1, b2, b3, b4, b5)
 
 	var (
 		test1 bool
