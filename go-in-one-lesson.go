@@ -38,17 +38,17 @@ Programs start running in package main.
 
 // importing packages
 import (
-	"fmt"
-	"math"
-	"time"
+	"fmt"  // for printing
+	"math" // for maths operations
+	"time" // for date & time
 )
 
 func main() {
 	fmt.Println("************** Welcome to Distribute Systems ********************")
 
-	fmt.Printf("\n\n> ========== Unit : Different ways to declare & initialize variables ========= \n\n")
-	var a0 int
-	a0 = 100
+	fmt.Printf("\n\n> ========== Unit 1 : Different ways to declare & initialize variables ========= \n\n")
+	var a0 int                                                               // declaring a variable
+	a0 = 100                                                                 //initializing a variable
 	var a1, a2, a3, a4, a5 = 1, 2, 3.0, "(String) := Short Assignment", true // compiler will infer the type of each variable
 	a1 = a0
 	// or
@@ -56,7 +56,7 @@ func main() {
 	var b3 float64
 	b1, b2 = a1, a2
 	b3 = a3
-	b4 := a4 // Short way of variable declartion if we use ":=" then we can skip "var"
+	b4 := a4 // Short way of variable declartion (& initializing) if we use ":=" then we can skip "var"
 	// c1 := 1.1
 	// c2 := "Hello"
 	const g = 9.89
@@ -79,20 +79,24 @@ func main() {
 	fmt.Println("> ", test7, test8)
 
 	var a float64 = 3.7656
-	var b int = int(a) // type conversion
+	var b int = int(a) // type conversion -> convert float to integer
 
 	fmt.Println(">Type converstion test:", b)
 
-	// numeric constants skipped
+	fmt.Println("\n>Convert float or int to string", fmt.Sprint(3.14), fmt.Sprint(3))
 
-	fmt.Println("\n> Convert float or int to string", fmt.Sprint(3.14), fmt.Sprint(3))
+	// ******************************* Unit 2: ***************************************************
+	fmt.Printf("\n\n>========== Unit 2: Loops, if-else, Switch Statments ========= \n\n")
 
-	fmt.Printf("\n\n> ========== Unit : Loops, if-else, Switch Statments ========= \n\n")
-
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 5; i++ { // for loop
 		fmt.Println(i)
 	}
 	fmt.Println("> i cannot be accessed outside of for loop")
+
+	// var i = -1
+	// for i = 0; i < 10; i++ {
+	// 	fmt.Println("2nd way of for loop", i)
+	// }
 
 	sum := 1 // for is also while in Go
 	for sum < 5 {
@@ -100,13 +104,15 @@ func main() {
 		fmt.Println(sum)
 	}
 
-	if sum > 5 {
+	if sum > 5 { // if condition
 		fmt.Println(">Sum is greater than 5")
 	}
 
 	sum = 100
 
-	if temp := math.Sqrt(float64(sum)); temp > float64(sum) {
+	// fmt.Println(math.Sqrt(sum))
+
+	if temp := math.Sqrt(float64(sum)); temp > float64(sum) { // if-else
 		fmt.Println(">Scope: temp cannot be accessed outside of if {}")
 	} else if temp == 0 {
 		fmt.Println(">Scope: temp can also be accessed in else if block {}", temp)
@@ -114,17 +120,7 @@ func main() {
 		fmt.Println(">Scope: temp can also be accessed in else block {}", temp)
 	}
 
-	// switch os := runtime.GOOS; os {
-	// case "hell":
-	// 	fmt.Println("hello OS")
-	// case "darwin":
-	// 	fmt.Println("OS x")
-	// case "linux":
-	// 	fmt.Println("Linux")
-	// default:
-	// 	fmt.Println("%s", os)
-	// }
-
+	// swtich statement
 	fmt.Println("When is Saturday?")
 
 	today := time.Now().Weekday()
@@ -153,11 +149,12 @@ func main() {
 		fmt.Println("Good evening")
 	}
 
-	//=========================== Pointers, Structs ======================
-	fmt.Printf("\n\n> ==========Unit : Pointers & Structs ========= \n\n")
+	// ******************************* Unit 3: ***************************************************
+	fmt.Printf("\n\n>==========Unit 3: Pointers & Structs ========= \n\n")
 	a = 3.14 // float
 	b = 3    // int
 
+	// pointers
 	var p1 *float64 // declaring a float pointer. its zero value is nil.
 	p1 = &a         // point to a
 	p2 := &b        // point to b i.e., combined the declartion and initializing step
@@ -167,25 +164,28 @@ func main() {
 
 	fmt.Println("Pointers:", a, b, *p1, *p2, p1, p2)
 
-	point := Point2D{0.0, 2.2}
-	point.x = 100.788 // use dot operator to access the field
-	fmt.Println("Structs:", point)
+	// Structs
+	point1 := Point2D{0.0, 2.2}
 
-	p3 := &point
+	point1.x = 100.788 // use dot operator to access the field
+	fmt.Println(">Structs:", point1)
+
+	p3 := &point1
 	(*p3).y = 111.11
 	p3.x = 200.22 // go allow to skip explicit defrence just to make notation clean
 
-	fmt.Println("> Structs", point)
+	fmt.Println(">Structs", point1)
 
 	// other ways to declare struct
 	var (
-		temppoint = Point2D{1.1, 3.3}
-		p4        = &Point2D{2.2, 4.4} // same as p3 but here it is a refrence to struct
+		point2 = Point2D{1.1, 3.3}
+		p4     = &Point2D{2.2, 4.4} // same as p3 but here it is a refrence to struct
 	)
 
-	fmt.Println("Ways to initialize structs:", temppoint, p3, p4)
+	fmt.Println("Ways to initialize structs:", point1, point2, p3, p4)
 
-	fmt.Printf("\n\n> ==========Unit : Array ========= \n\n")
+	// ******************************* Unit 4: ***************************************************
+	fmt.Printf("\n\n> ==========Unit 4: Array ========= \n\n")
 	var array1 [2]string // you cannot resize an array when it is declared
 	array1[0] = "Distributed"
 	array1[1] = "Systems"
@@ -193,57 +193,58 @@ func main() {
 	array2 := [4]float64{0.0, 1.1, 2.2, 3.3} // another way of declartion
 	array2[0] = 88
 
-	fmt.Printf("\n\n> ==========Unit : Slices ========= \n\n")
+	fmt.Println(">Array ", array1, array2)
+
+	// ******************************* Unit 5: ***************************************************
+	fmt.Printf("\n\n> ==========Unit 5: Slices ========= \n\n")
 	/*
 		A dynamically Sized array.
 	*/
 	slice1 := []int{1, 2, 3} // slices are declared like arrays but without length
 	l := len(slice1)         // number of elems contain in the slice
 	c := cap(slice1)         // capacity of the array. capacity >= length
-	fmt.Printf("Slice: %v, lenght = %d, capacity = %d \n", slice1, l, c)
+	fmt.Printf(">Slice 1: %v, lenght = %d, capacity = %d \n", slice1, l, c)
 
 	length := 0
 	capacity := 20
 	slice2 := make([]string, length, capacity) // another way to initialize slices
-	fmt.Printf("make(array, len, cap): slice2 = %v, len = %d, c= %d\n", slice2, len(slice2), cap(slice2))
+	fmt.Printf("Slice2 = %v, len = %d, c= %d\n", slice2, len(slice2), cap(slice2))
 	slice2 = append(slice2, "First elem")                // return a slice which contain all the elems
 	slice2 = append(slice2, "Second elem", "Third elem") // insert multiples entries
-	fmt.Printf("slice2 = %v, len = %d, c= %d\n", slice2, len(slice2), cap(slice2))
+	fmt.Printf("Slice2 (inserting elements) = %v, len = %d, c= %d\n", slice2, len(slice2), cap(slice2))
 
 	var slice3 []int // another way of declaring slice
-	fmt.Printf("slice3 = %v, len = %d, c= %d\n", slice3, len(slice3), cap(slice3))
+	fmt.Printf("Slice3 = %v, len = %d, c= %d\n", slice3, len(slice3), cap(slice3))
 	slice3 = append(slice3, 2, 3, 5, 7) // append will increase the capacity of the array automatically
-	fmt.Printf("slice3 = %v, len = %d, c= %d\n", slice3, len(slice3), cap(slice3))
+	fmt.Printf("Slice3 = %v, len = %d, c= %d\n", slice3, len(slice3), cap(slice3))
 
-	// slice4 := []struct {
-	// 	name string
-	// 	id   int
-	// }{{"Faizan", 171}, {"Karim", 172}, {"Ali", 173}}
+	// ******************************* Unit 6: ***************************************************
+	fmt.Printf("\n\n> ========== Unit 6: Maps (Dictionary or key-value data structure) ========= \n\n")
 
-	//Skip: Slices of slices
-	// Skip: range
+	/*
+		To create an empty map, use the builtin make: make(map[key-type]val-type).
+	*/
 
-	fmt.Printf("\n\n> ========== Unit : Maps (Dictionary or key-value data structure) ========= \n\n")
+	var student2courses map[string][]string     // nil map i.e. contain nothing
+	student2courses = make(map[string][]string) // initialize the map
+	//prof2courses := make(map[string][]string)
 
-	var map1 map[string][]string     // nil map i.e. contain nothing
-	map1 = make(map[string][]string) // initialize the map
-	//map2 := map[string][]string
+	// inserting keys
+	student2courses["student1"] = []string{"Data-structure", "computer-networks", "Security"}
+	student2courses["student2"] = []string{"Algorithms", "Distributed-Systems", "Machine-Learning"}
+	student2courses["student3"] = append(student2courses["student3"], "Computer-Vision", "Deep-Learning")
 
-	map1["student1"] = []string{"Data-structure", "computer-networks", "Security"}
-	map1["student2"] = []string{"Algorithms", "Distributed-Systems", "Machine-Learning"}
+	fmt.Printf("Student2Courses %v", student2courses)
 
-	map1["student3"] = append(map1["student3"], "Computer-Vision", "Deep-Learning")
-
-	fmt.Println(map1)
-	delete(map1, "student1") // to delete a key and its value from map
-	fmt.Println(map1)
-	value1, ok1 := map1["student1"]
-	_, ok2 := map1["student2"]
+	// delete a key
+	delete(student2courses, "student1") // to delete a key and its value from map
+	fmt.Println("After deletion of key", student2courses)
+	value1, ok1 := student2courses["student1"] // to check wehter key exists or not
+	_, ok2 := student2courses["student2"]
 	fmt.Println(ok1, value1, ok2)
 
-	//Skip: Map literals are like struct literals, but the keys are required.
-
-	fmt.Printf("\n\n> ========== Unit : Functions ========= \n\n")
+	// ******************************* Unit 7: ***************************************************
+	fmt.Printf("\n\n> ========== Unit 7: Functions ========= \n\n")
 
 	fmt.Println("Addition Function: add1() & add2 () : ", add1(3, 4), add2(3, 4))
 	v1, _, v3 := returnMultipleValues1(4, 6, "hello")
@@ -258,16 +259,20 @@ func main() {
 	fmt.Println(hypot(3.0, 2.0))
 	fmt.Println(computeFun(3.0, 2.0, hypot))
 
-	//Advance: clousure: Go functions may be closures. A clousre is a function value.
-	adder1 := closureExampleFunction() // adder1 is clousre function
-	adder2 := closureExampleFunction() // adder2 is now a different clousre function. i.e., adder1 and adder2 functions have their own separate independent variable
-	for i := 0; i < 10; i++ {
-		fmt.Println(adder1(i), adder2(-i))
-	}
+	// //Advance: clousure: Go functions may be closures. A clousre is a function value.
+	// adder1 := closureExampleFunction() // adder1 is clousre function
+	// adder2 := closureExampleFunction() // adder2 is now a different clousre function. i.e., adder1 and adder2 functions have their own separate independent variable
+	// for i := 0; i < 10; i++ {
+	// 	fmt.Println(adder1(i), adder2(-i))
+	// }
 
-	fmt.Printf("\n\n> ========== Unit : Methods ========= \n\n")
+	// ******************************* Unit 8: ***************************************************
+	fmt.Printf("\n\n> ========== Unit 8: Methods ========= \n\n")
 	/*
 		Go doesnt have classes but you can link methods to types.
+		A method is a function with a special receiver argument.
+		The receiver appears in its own argument list between the func keyword and the method name.
+		In this example, the computeDistance method has a receiver of type Point2D named p1.
 	*/
 	p5 := Point2D{20, 20}
 	p6 := Point2D{10, 10}
@@ -279,23 +284,18 @@ func main() {
 
 	fmt.Println(p5)
 
-	//**************************************************************
-	fmt.Printf("\n\n> ========== Unit : Interfaces ========= \n\n")
+	// ******************************* Unit 9: ***************************************************
+	fmt.Printf("\n\n> ========== Unit 9: Interfaces ========= \n\n")
 
 	/*
 		In Go, an interface is a type which only contain "methods signatures".
 	*/
 
-	point2d := Point2D{3, 4}
-	point3d := Point3D{3, 4, 5}
+	rec := MyRect{width: 3, height: 4}
+	cir := MyCircle{radius: 5}
 
-	var inter1 MyInterface // inter1 is a variable of type MyInterface
-
-	inter1 = &point2d // we can interface any v
-	fmt.Println(inter1, point2d)
-
-	inter1 = &point3d
-	fmt.Println(inter1, point3d)
+	measure(rec)
+	measure(cir)
 
 }
 
@@ -343,7 +343,7 @@ type Point2D struct {
 
 // declaring a method on a data type
 
-func (p1 Point2D) computeDistance(p2 Point2D) float64 {
+func (p1 Point2D) computeDistance(p2 Point2D) float64 { // p1 is the reciever
 
 	return math.Sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y))
 }
@@ -355,25 +355,43 @@ func (f MyFloat) convertToInteger() int {
 	return int(f)
 }
 
+// remove pointer sign and see its effect
 func (p *Point2D) scaleByTen() {
 	p.x = p.x + 10
 	p.y = p.y + 10
 }
 
-// Interface
-
-type Point3D struct {
-	x float64
-	y float64
-	z float64
+// interfaces
+type Geometry interface {
+	area() float64
+	perim() float64
 }
 
-func (p *Point3D) scaleByTen() {
-	p.x += 10
-	p.y += 10
-	p.y += 10
+type MyRect struct {
+	width, height float64
 }
 
-type MyInterface interface {
-	scaleByTen()
+type MyCircle struct {
+	radius float64
+}
+
+func (r MyRect) area() float64 {
+	return r.width * r.height
+}
+func (r MyRect) perim() float64 {
+	return 2*r.width + 2*r.height
+}
+
+func (c MyCircle) area() float64 {
+	return math.Pi * c.radius * c.radius
+}
+
+func (c MyCircle) perim() float64 {
+	return 2 * math.Pi * c.radius
+}
+
+func measure(g Geometry) {
+	fmt.Println(g)
+	fmt.Println(g.area())
+	fmt.Println(g.perim())
 }
