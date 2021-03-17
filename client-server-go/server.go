@@ -11,7 +11,7 @@ func handleConnection(conn net.Conn) {
 	message, _ := bufio.NewReader(conn).ReadString('\n')          // will listen for message to process ending in newline (\n)
 	fmt.Print(">Server Side| Message Received:", string(message)) // printing the message on terminal
 	servermessage := "Thank you for connecting."
-	conn.Write([]byte(servermessage + "\n")) // writing back to cleitn
+	conn.Write([]byte(servermessage + "\n")) // writing back to client
 
 }
 

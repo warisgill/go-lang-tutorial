@@ -1,5 +1,12 @@
 package main
 
+/*
+	Package rpc provides access to the exported methods of an object across a network
+	or other I/O connection.
+	A server registers an object, making it visible as a service with the name of the type of the object.
+	After registration, exported methods of the object will be accessible remotely.
+*/
+
 import (
 	"errors"
 	"fmt"
@@ -12,30 +19,40 @@ type Args struct {
 	A, B int
 }
 
-type Quotient struct {
+type Answer struct {
 	Quo, Rem int
 }
 
-type Arith int // service struct
+type PS3 struct {
+}
 
-func (t *Arith) Multiply(args *Args, reply *int) error {
+func (t *PS3) Multiply(args *Args, reply *int) error {
 	*reply = args.A * args.B
 	return nil
 }
 
-func (t *Arith) Divide(args *Args, quo *Quotient) error {
+func (t *PS3) Divide(args *Args, reply *Answer) error {
 	if args.B == 0 {
 		return errors.New("divide by zero")
 	}
-	quo.Quo = args.A / args.B
-	quo.Rem = args.A % args.B
+	reply.Quo = args.A / args.B
+	reply.Rem = args.A % args.B
 	return nil
 }
 
+/*
+	Package rpc provides access to the exported methods of an object across a
+	network or other I/O connection.
+	A server registers an object, making it visible as a service with the name
+	of the type of the object. After registration, exported methods of the object
+	will be accessible remotely.
+	https://golang.org/pkg/net/rpc/
+*/
+
 func main() {
 
-	// creating and regestring Arith Service on the network
-	magic := new(Arith)
+	// creating and regestring PS3 object as a Service on the network
+	magic := new(PS3)
 	rpc.Register(magic)
 
 	// sarting server

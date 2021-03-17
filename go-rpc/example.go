@@ -9,41 +9,48 @@ type Args struct {
 	A, B int
 }
 
-type Quotient struct {
+type Answer struct {
 	Quo, Rem int
 }
 
-type Arith int
+type PS3 struct {
+}
 
-func (t *Arith) Multiply(args *Args, reply *int) error {
+/*
+	Go does not have classes. However, you can define methods on types.
+
+	A method is a function with a special receiver argument.
+*/
+
+func (t *PS3) Multiply(args *Args, reply *int) error {
 	*reply = args.A * args.B
 	return nil
 }
 
-func (t *Arith) Divide(args *Args, quo *Quotient) error {
+func (t *PS3) Divide(args *Args, reply *Answer) error {
 	if args.B == 0 {
 		return errors.New("divide by zero")
 	}
-	quo.Quo = args.A / args.B
-	quo.Rem = args.A % args.B
+	reply.Quo = args.A / args.B
+	reply.Rem = args.A % args.B
 	return nil
 }
 
 func main() {
 
 	fmt.Printf("Simple Example, \n")
-	var magic Arith
+	var magic PS3
 
 	args := Args{17, 10}
-	var reply int
-	var quot Quotient
+	var reply1 int
+	var reply2 Answer // because type is different
 
-	magic.Multiply(&args, &reply)
+	magic.Multiply(&args, &reply1)
 
-	fmt.Println(reply)
+	fmt.Println(reply1)
 
-	magic.Divide(&args, &quot)
+	magic.Divide(&args, &reply2)
 
-	fmt.Println(quot)
+	fmt.Println(reply2)
 
 }
